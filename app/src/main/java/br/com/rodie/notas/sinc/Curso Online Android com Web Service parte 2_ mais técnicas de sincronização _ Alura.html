@@ -1,0 +1,1219 @@
+<!DOCTYPE html><html
+lang="pt-BR"><head><meta
+charset="UTF-8"><meta
+name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0"><title>Curso Online Android com Web Service parte 2: mais técnicas de sincronização | Alura</title><meta
+name="description" content="Altere e remova os dados tanto da aplicação Android quanto do Web Service.. Atualize a lista de dados com o Swipe Refresh Layout.. Entenda o que é push notification e implemente por meio do Firebase Cloud Messaging.. Dispare eventos dentro da aplicação Android por meio do Event Bus.. Configure a aplicação Android para que ela atualize os dados automaticamente.. Entenda o que é soft delete e os cuidados que devem ser tomados.. Remova os dados diretamente no Web Service e replique na aplicação Android."><meta
+property="og:description" content="Altere e remova os dados tanto da aplicação Android quanto do Web Service.. Atualize a lista de dados com o Swipe Refresh Layout.. Entenda o que é push notification e implemente por meio do Firebase Cloud Messaging.. Dispare eventos dentro da aplicação Android por meio do Event Bus.. Configure a aplicação Android para que ela atualize os dados automaticamente.. Entenda o que é soft delete e os cuidados que devem ser tomados.. Remova os dados diretamente no Web Service e replique na aplicação Android." ><meta
+property="og:title" content="Curso Online Android com Web Service parte 2: mais técnicas de sincronização | Alura"><meta
+property="og:site_name" content="Alura"><meta
+property="og:url" content="https://www.alura.com.br/curso-online-android-sincronizacao-com-servidor-parte-2"><meta
+property="og:image" content="https://www.alura.com.br/assets/api/share/curso-android-sincronizacao-com-servidor-parte-2.png"><meta
+property="fb:app_id" content="140078819399376"><meta
+property="og:type" content="website"><meta
+name="referrer" content="unsafe-url"><meta
+name="theme-color" content="#fbcf36"><meta
+name="thumbnail" content="https://www.alura.com.br/assets/api/cursos/512/android-sincronizacao-com-servidor-parte-2.png" /><link
+rel="stylesheet" href="/bundle,reset,base,colors,font,block/addSearch,block/buttons,block/carreiraHeader,block/categoriaBannerTarjeta,block/categoriaCard,block/conteudo,block/coresHomeEPlanos,block/cursoCard,block/depoimentos,block/destaqueAlunos,block/elasticMedia,block/footer-listaCarreiras,block/footer,block/form-erro,block/formContatoEmpresas,block/header,block/highlighted,block/painelPlanos,block/parceriaBanner,block/titulo-destaque,block/titulos,block/whitepaperCard.1520277394.css"><link
+rel="stylesheet" href="/bundle,curso/banner,curso/carreiras,curso/conteudo,curso/detalhes.1520277394.css"><link
+href="/assets/font/opensans/opensans-light.woff2" rel="preload" as="font" type="font/woff2" crossorigin><link
+href="/assets/font/opensans/opensans-bold.woff2" rel="preload" as="font" type="font/woff2" crossorigin><link
+href="/assets/font/opensans/opensans-extrabold.woff2" rel="preload" as="font" type="font/woff2" crossorigin><link
+href="/assets/font/opensans/opensans-regular.woff2" rel="preload" as="font" type="font/woff2" crossorigin><link
+href="/assets/font/opensans/opensans-italic.woff2" rel="preload" as="font" type="font/woff2" crossorigin><link
+rel="canonical" href="https://www.alura.com.br/curso-online-android-sincronizacao-com-servidor-parte-2"/> <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://www.alura.com.br/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@id":"https://www.alura.com.br/cursos-online-mobile","name":"Cursos online de Mobile"}},{"@type":"ListItem","position":3,"item":{"@id":"https://www.alura.com.br/curso-online-android-sincronizacao-com-servidor-parte-2","name":"Android com Web Service parte 2: mais técnicas de sincronização"}}]}</script> <script src="/assets/js/facebookpixel.1520277394.js" async></script> <noscript>
+<img
+height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1067810189950610&ev=PageView&noscript=1"/>
+</noscript></head><body
+class=""><header
+class="header "><section
+class="header-barraBusca"><div
+class="container"><form
+action="/busca" class="header-barraBusca-form">
+<label
+for="header-barraBusca-form-campoBusca">Qual curso procura?</label>
+<input
+type="search" id="header-barraBusca-form-campoBusca" name="query" placeholder="Digite aqui a busca">
+<button
+class="header-barraBusca-form-submit" type="submit">Buscar</button></form></div></section><div
+class="container">
+<a
+href="/" class="header-logo">
+<img
+src="/assets/img/alura-logo-white.1520277394.svg" alt="Alura" class="logo-branco">
+<img
+src="/assets/img/alura-logo.1520277394.svg" alt="Alura" class="logo-preto">
+</a><div
+class="header-utilitario">
+<a
+href="/busca" class="header-utilitario-busca" aria-label="Busca">
+<svg
+class="header-utilitario-busca-icone"><use
+xlink:href="/svg,1520277394/header#icon-header-busca"/></svg>
+</a>
+<a
+href="/dashboard" class="header-utilitario-login">Login</a>
+<a
+href="/planos-cursos-online" class="header-utilitario-cta">Matricule-se</a></div><div
+class="header-navegacao"><nav
+class="header-navegacao-cursos navegacao-hover"><div
+class="header-navegacao-cursos-texto navegacao-texto">
+<span
+class="minusculo">todos os</span>
+<span
+class="maiusculo">Cursos Alura</span></div>
+<svg
+class="header-navegacao-cursos-icone"><use
+xlink:href="/svg,1520277394/header#icon-header-icon-arrow"/></svg><ul
+class="header-navegacao-cursos-lista"><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--mobile">
+<a
+href="/cursos-online-mobile" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-mobile"/>
+</svg>
+<span>Cursos de</span>
+Mobile                            </a></li><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--programacao">
+<a
+href="/cursos-online-programacao" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-programacao"/>
+</svg>
+<span>Cursos de</span>
+Programação                            </a></li><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--front-end">
+<a
+href="/cursos-online-front-end" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-front-end"/>
+</svg>
+<span>Cursos de</span>
+Front-end                            </a></li><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--infraestrutura">
+<a
+href="/cursos-online-infraestrutura" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-infraestrutura"/>
+</svg>
+<span>Cursos de</span>
+Infraestrutura                            </a></li><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--design-ux">
+<a
+href="/cursos-online-design-ux" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-design-ux"/>
+</svg>
+<span>Cursos de</span>
+Design & UX                            </a></li><li
+class="header-cursos-lista-categoria header-cursos-lista-categoria--business">
+<a
+href="/cursos-online-business" class="unlinkify">
+<svg
+class="header-lista-categoria-icone">
+<use
+xlink:href="/svg,1520277394/categorias#icon-categorias-icon-business"/>
+</svg>
+<span>Cursos de</span>
+Business                            </a></li></ul></nav><a
+href="/carreiras" class="header-navegacao-carreiras navegacao-hover"><div
+class="header-navegacao-carreiras-texto navegacao-texto">
+<span
+class="minusculo">conheça as</span>
+<span
+class="maiusculo">Carreiras</span></div>
+</a><a
+href="/empresas" class="header-navegacao-empresas navegacao-hover"><div
+class="header-navegacao-empresas-texto navegacao-texto">
+<span
+class="minusculo">alura para</span>
+<span
+class="maiusculo">Empresas</span></div>
+</a></div></div></header><div
+class="curso-banner" style="background-color: #CE527C"><div
+class="container">
+<a
+href="/cursos-online-mobile" class="categoriaTarjeta bg-categoria-mobile">
+<svg
+class="categoriaTarjeta-icone"><use
+xlink:href="/svg,1520277394/categorias#icon-categorias-mobile"/></svg><h2 class="categoriaTarjeta-nome">Mobile</h2>
+</a><div
+class="curso-banner-headline">
+<img
+class="curso-banner-headline-icone" src="/assets/api/cursos/android-sincronizacao-com-servidor-parte-2.svg" alt="Android com Web Service parte 2: mais técnicas de sincronização"><div
+class="hreview-aggregate"><h1 class="curso-banner-headline-titulo">
+Curso online de
+<strong>Android com Web Service parte 2: mais técnicas de sincronização</strong></h1>
+<span
+class="votes">352</span>
+<span
+class="rating">9.3</span></div></div><div
+class="curso-banner-detalhes-list"><div
+class="curso-banner-detalhes-item"><p
+class="curso-banner-detalhes-item-numero" itemprop="ratingValue">
+9,3</p><p
+class="curso-banner-detalhes-item-texto">é a nota desse curso</p></div><div
+class="curso-banner-detalhes-item"><p
+class="curso-banner-detalhes-item-numero">
+1.482</p><p
+class="curso-banner-detalhes-item-texto">alunos neste curso</p></div></div></div></div><div
+class="curso-detalhes"><div
+class="container"><div
+class="curso-detalhes-habilidades"><h2 class="curso-detalhes-habilidades-intro">Faça esse curso e...</h2><ul
+class="curso-detalhes-habilidades-list"><li
+class="curso-detalhes-habilidades-item">
+Altere e remova os dados tanto da aplicação Android quanto do Web Service.</li><li
+class="curso-detalhes-habilidades-item">
+Atualize a lista de dados com o Swipe Refresh Layout.</li><li
+class="curso-detalhes-habilidades-item">
+Entenda o que é push notification e implemente por meio do Firebase Cloud Messaging.</li><li
+class="curso-detalhes-habilidades-item">
+Dispare eventos dentro da aplicação Android por meio do Event Bus.</li><li
+class="curso-detalhes-habilidades-item">
+Configure a aplicação Android para que ela atualize os dados automaticamente.</li><li
+class="curso-detalhes-habilidades-item">
+Entenda o que é soft delete e os cuidados que devem ser tomados.</li><li
+class="curso-detalhes-habilidades-item">
+Remova os dados diretamente no Web Service e replique na aplicação Android.</li></ul></div><div
+class="curso-detalhes-info"><ul
+class="curso-detalhes-info-list"><li
+class="curso-detalhes-info-item curso-detalhes-info-item-time">
+12h para conclusão</li><li
+class="curso-detalhes-info-item curso-detalhes-info-item-exercises">
+36 atividades</li><li
+class="curso-detalhes-info-item curso-detalhes-info-item-video">
+175 minutos de videos</li><li
+class="curso-detalhes-info-item curso-detalhes-info-item-faq">
+<a
+class="curso-detalhes-info-faq-texto" href="https://cursos.alura.com.br/course/android-sincronizacao-com-servidor-parte-2/faq" target="_blank">Perguntas frequentes</a></li></ul></div></div></div><div
+class="painelPlanos painelPlanosComOnda" data-course-id='548' id="planos" ><div
+class="container"><div
+class="painelPlanos-planos"><div
+class="painelPlanos-plano" data-premium><div
+class="painelPlanos-def"><h3 class="painelPlanos-plano-titulo-wrapper"><div
+class="painelPlanos-plano-titulo">
+Plano Premium</div></h3>
+<span
+class="painelPlanos-plano-preco">
+<span
+class="painelPlanos-plano-preco-parcelas">
+12x
+</span>
+<del
+class="painelPlanos-plano-preco-cheio">
+R$100                                </del>
+R$75						</span><div
+class="painelPlanos-plano-precoTotal">
+(ou à vista
+<del
+class="painelPlanos-plano-precoTotal-cheio">
+R$1.200                                </del>
+<strong>R$900</strong>)
+<img
+aria-labelledby="infoTexto" class="painelPlanos-plano-precoTotal-info" src="/assets/img/painelPlanos/icon-info.1520277394.svg" >
+<span
+id="infoTexto" class="painelPlanos-plano-precoTotal-infoTexto">Aproveite enquanto os preços antigos continuam valendo!</span></div>
+<a
+href="/compra?p=premium" class="painelPlanos-plano-botaoComprar" nofollow>
+Matricule-se
+</a></div><ul
+class="painelPlanos-info"><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+520</div>
+<span>Cursos</span></li><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+30.074</div>
+<span>Atividades</span></li><li
+class="painelPlanos-info-item">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Estude por 1 ano</div></li><li
+class="painelPlanos-info-item" title="Livros de tecnologia">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">3 ebooks da Casa do Código</div></li><li
+class="painelPlanos-info-item" title="Cursos para reforçar seu inglês">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">Curso de inglês na Alura Língua</div></li><li
+class="painelPlanos-info-item" title="Cursos para quem está começando com animações, games e programas">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">Acesso à Alura Start</div></li></ul></div><div
+class="painelPlanos-plano" data-premiumplus><div
+class="painelPlanos-def"><h3 class="painelPlanos-plano-titulo-wrapper"><div
+class="painelPlanos-plano-titulo">
+Plano Premium Plus</div></h3>
+<span
+class="painelPlanos-plano-preco">
+<span
+class="painelPlanos-plano-preco-parcelas">
+12x
+</span>
+<del
+class="painelPlanos-plano-preco-cheio">
+R$125                                </del>
+R$100						</span><div
+class="painelPlanos-plano-precoTotal">
+(ou à vista
+<del
+class="painelPlanos-plano-precoTotal-cheio">
+R$1.500                                </del>
+<strong>R$1.200</strong>)
+<img
+aria-labelledby="infoTexto" class="painelPlanos-plano-precoTotal-info" src="/assets/img/painelPlanos/icon-info.1520277394.svg" >
+<span
+id="infoTexto" class="painelPlanos-plano-precoTotal-infoTexto">Aproveite enquanto os preços antigos continuam valendo!</span></div>
+<a
+href="/compra?p=premiumplus" class="painelPlanos-plano-botaoComprar" nofollow>
+Matricule-se
+</a></div><ul
+class="painelPlanos-info"><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+520</div>
+<span>Cursos</span></li><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+30.074</div>
+<span>Atividades</span></li><li
+class="painelPlanos-info-item">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Estude por 1 ano</div></li><li
+class="painelPlanos-info-item" title="Livros de tecnologia">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">3 ebooks da Casa do Código</div></li><li
+class="painelPlanos-info-item" title="Cursos para reforçar seu inglês">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Curso de inglês na Alura Língua</div></li><li
+class="painelPlanos-info-item" title="Cursos para quem está começando com animações, games e programas">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Acesso à Alura Start</div></li></ul></div></div><div
+class="painelPlanos-vantagens"><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-acesso"/>
+</svg>
+Acesso por 1 ano</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-certificado"/>
+</svg>
+Certificado digital de conclusão</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon i24h">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-24h"/>
+</svg>
+Estude 24h/dia onde e quando quiser</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-cursos"/>
+</svg>
+Novos cursos toda semana</div></div></div><div
+class="painelPlanos-footer">
+<svg
+class="painelPlanos-onda" preserveAspectRatio="none">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-background-onda"/>
+</svg><div
+class="container"><ul
+class="painelPlanos-footer-list"><li
+class="painelPlanos-footer-item painelPlanos-footer-item-curso">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-cursos"/>
+</svg><h3>520</h3>
+<span>cursos</span></li><li
+class="painelPlanos-footer-item painelPlanos-footer-item-aula">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-aulas"/>
+</svg><h3>3.257</h3>
+<span>aulas</span></li><li
+class="painelPlanos-footer-item painelPlanos-footer-item-exerc">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-exercicios"/>
+</svg><h3>30.074</h3>
+<span>atividades</span></li></ul></div></div></div><div
+class="curso-carreiras"><div
+class="container"><h2 class="curso-carreiras-titulo">Carreiras com esse curso</h2><ul
+class="curso-carreiras-lista"><li
+class="curso-carreiras-item">
+<a
+href="carreira-desenvolvedor-android" style="background: #ffd44a">Desenvolvedor Android</a></li></ul></div></div><div
+class="curso-conteudo"><div
+class="container"><div
+class="curso-conteudo-maisInfos"><div
+class="curso-conteudo-maisInfos-item"><h2 class="curso-conteudo-maisInfos-item-titulo curso-conteudo-maisInfos-video">Veja a 1ª aula</h2><div
+class="curso-conteudo-maisInfos-videoWrapper"><div
+class="elasticMedia-container" data-src="https://player.vimeo.com/video/200709667">
+<noscript><iframe
+class="elasticMedia" src="https://player.vimeo.com/video/200709667" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></noscript></div></div></div><div
+class="curso-conteudo-maisInfos-item curso-conteudo-maisInfos-itemBordered"><h2 class="curso-conteudo-maisInfos-item-titulo curso-conteudo-maisInfos-publicoAlvo">Público alvo</h2><p
+class="curso-conteudo-maisInfos-item-texto">Desenvolvedores Android que pretendem aplicar técnicas de comunicação entre Apps Android e Web Service.</p></div><div
+class="curso-conteudo-maisInfos-item curso-conteudo-maisInfos-itemBordered"><h2 class="curso-conteudo-maisInfos-item-titulo curso-conteudo-maisInfos-nivel">Nível de Dificuldade</h2><p
+class="curso-conteudo-maisInfos-item-texto">
+Intermediário</p></div><div
+class="curso-conteudo-maisInfos-item"><h2 class="curso-conteudo-maisInfos-item-titulo curso-conteudo-maisInfos-instrutores">Instrutores</h2><ul
+class="lista-instrutores"><li
+class="lista-instrutores-item"><div
+class="instrutores-item-imagemETwitter"><a
+class="instrutores-item-link" href="https://cursos.alura.com.br/user/alexfelipe" aria-label="Perfil do Alex Felipe">
+<img
+class="instrutores-item-img" src="https://www.gravatar.com/avatar/70a7eac4a9659c14438d60d549f813b7.png?r=PG&size=50x50&d=https%3A%2F%2Fcursos.alura.com.br%2Fimages%2Fforum%2Favatar_a.png" alt=""
+srcset="https://www.gravatar.com/avatar/70a7eac4a9659c14438d60d549f813b7.png?r=PG&size=50x50&d=https%3A%2F%2Fcursos.alura.com.br%2Fimages%2Fforum%2Favatar_a.png 50w, https://www.gravatar.com/avatar/70a7eac4a9659c14438d60d549f813b7.png?r=PG&size=100x100&d=https%3A%2F%2Fcursos.alura.com.br%2Fimages%2Fforum%2Favatar_a.png 100w, https://www.gravatar.com/avatar/70a7eac4a9659c14438d60d549f813b7.png?r=PG&size=200x200&d=https%3A%2F%2Fcursos.alura.com.br%2Fimages%2Fforum%2Favatar_a.png 200w" sizes="60px">
+</a>
+<a
+class='instrutores-item-twitter' target='_blank' href='https://twitter.com/@alexfelipi'><img
+src='/assets/img/instrutores/twitter.1520277394.svg' alt='twitter'></a></div><div
+class="instrutor-detalhes"><h3 class="instrutores-item-nome">
+<a
+class="instrutores-item-link" href="https://cursos.alura.com.br/user/alexfelipe">
+Alex Felipe						</a></h3><p
+class="instrutores-item-descricao">
+Instrutor e desenvolvedor na Alura com foco em Java, Kotlin,  Android e Spring. Nas horas vagas, estuda sobre novidades do mundo de desenvolvimento de software e escreve artigos técnicos de diversos assuntos.</p></div></li></ul></div><div
+class="curso-conteudo-maisInfos-item"><div
+class="curso-conteudo-maisInfos-item-cta"><p
+class="curso-conteudo-maisInfos-item-cta-texto">Já é aluno?</p>
+<a
+href="http://cursos.alura.com.br/course/android-sincronizacao-com-servidor-parte-2" class="curso-conteudo-maisInfos-item-cta-button buttonLight" type="button">Começar o Curso</a></div></div></div><div
+class="curso-conteudo-detalhado"><h2 class="curso-conteudo-detalhado-titulo">Conteúdo Detalhado</h2><ol
+class="curso-conteudo-detalhado-list"><li
+class="curso-conteudo-detalhado-item"><h3 class="curso-conteudo-detalhado-item-titulo">Editando, removendo e atualizando alunos</h3><ul
+class="curso-conteudo-detalhado-item-list"><li
+class="curso-conteudo-detalhado-item-topico">Alterando alunos</li><li
+class="curso-conteudo-detalhado-item-topico">Removendo alunos</li><li
+class="curso-conteudo-detalhado-item-topico">Adicionando Swipe Refresh Layout</li></ul></li><li
+class="curso-conteudo-detalhado-item"><h3 class="curso-conteudo-detalhado-item-titulo">Recebendo informações do servidor</h3><ul
+class="curso-conteudo-detalhado-item-list"><li
+class="curso-conteudo-detalhado-item-topico">Introduzindo push notification</li><li
+class="curso-conteudo-detalhado-item-topico">Instalando e Configurando o Firebase Cloud Messaging</li></ul></li><li
+class="curso-conteudo-detalhado-item"><h3 class="curso-conteudo-detalhado-item-titulo">Atualizando lista de alunos automaticamente</h3><ul
+class="curso-conteudo-detalhado-item-list"><li
+class="curso-conteudo-detalhado-item-topico">Convertendo Json para aluno</li><li
+class="curso-conteudo-detalhado-item-topico">Adicionando Event Bus</li><li
+class="curso-conteudo-detalhado-item-topico">Atualizando alunos por disparo</li></ul></li><li
+class="curso-conteudo-detalhado-item"><h3 class="curso-conteudo-detalhado-item-titulo">Removendo aluno do servidor e App Soft Delete</h3><ul
+class="curso-conteudo-detalhado-item-list"><li
+class="curso-conteudo-detalhado-item-topico">Introdução ao Soft Delete</li><li
+class="curso-conteudo-detalhado-item-topico">Removendo diretamente no servidor</li></ul></li></ol></div></div></div><div
+class="painelPlanos painelPlanosComOnda" data-course-id='548' id="planos" ><div
+class="container"><div
+class="painelPlanos-planos"><div
+class="painelPlanos-plano" data-premium><div
+class="painelPlanos-def"><h3 class="painelPlanos-plano-titulo-wrapper"><div
+class="painelPlanos-plano-titulo">
+Plano Premium</div></h3>
+<span
+class="painelPlanos-plano-preco">
+<span
+class="painelPlanos-plano-preco-parcelas">
+12x
+</span>
+<del
+class="painelPlanos-plano-preco-cheio">
+R$100                                </del>
+R$75						</span><div
+class="painelPlanos-plano-precoTotal">
+(ou à vista
+<del
+class="painelPlanos-plano-precoTotal-cheio">
+R$1.200                                </del>
+<strong>R$900</strong>)
+<img
+aria-labelledby="infoTexto" class="painelPlanos-plano-precoTotal-info" src="/assets/img/painelPlanos/icon-info.1520277394.svg" >
+<span
+id="infoTexto" class="painelPlanos-plano-precoTotal-infoTexto">Aproveite enquanto os preços antigos continuam valendo!</span></div>
+<a
+href="/compra?p=premium" class="painelPlanos-plano-botaoComprar" nofollow>
+Matricule-se
+</a></div><ul
+class="painelPlanos-info"><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+520</div>
+<span>Cursos</span></li><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+30.074</div>
+<span>Atividades</span></li><li
+class="painelPlanos-info-item">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Estude por 1 ano</div></li><li
+class="painelPlanos-info-item" title="Livros de tecnologia">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">3 ebooks da Casa do Código</div></li><li
+class="painelPlanos-info-item" title="Cursos para reforçar seu inglês">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">Curso de inglês na Alura Língua</div></li><li
+class="painelPlanos-info-item" title="Cursos para quem está começando com animações, games e programas">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-unchecked"/>
+</svg><div
+class="painelPlanos-info-texto">Acesso à Alura Start</div></li></ul></div><div
+class="painelPlanos-plano" data-premiumplus><div
+class="painelPlanos-def"><h3 class="painelPlanos-plano-titulo-wrapper"><div
+class="painelPlanos-plano-titulo">
+Plano Premium Plus</div></h3>
+<span
+class="painelPlanos-plano-preco">
+<span
+class="painelPlanos-plano-preco-parcelas">
+12x
+</span>
+<del
+class="painelPlanos-plano-preco-cheio">
+R$125                                </del>
+R$100						</span><div
+class="painelPlanos-plano-precoTotal">
+(ou à vista
+<del
+class="painelPlanos-plano-precoTotal-cheio">
+R$1.500                                </del>
+<strong>R$1.200</strong>)
+<img
+aria-labelledby="infoTexto" class="painelPlanos-plano-precoTotal-info" src="/assets/img/painelPlanos/icon-info.1520277394.svg" >
+<span
+id="infoTexto" class="painelPlanos-plano-precoTotal-infoTexto">Aproveite enquanto os preços antigos continuam valendo!</span></div>
+<a
+href="/compra?p=premiumplus" class="painelPlanos-plano-botaoComprar" nofollow>
+Matricule-se
+</a></div><ul
+class="painelPlanos-info"><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+520</div>
+<span>Cursos</span></li><li
+class="painelPlanos-info-comum"><div
+class="painelPlanos-info-numero">
+30.074</div>
+<span>Atividades</span></li><li
+class="painelPlanos-info-item">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Estude por 1 ano</div></li><li
+class="painelPlanos-info-item" title="Livros de tecnologia">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">3 ebooks da Casa do Código</div></li><li
+class="painelPlanos-info-item" title="Cursos para reforçar seu inglês">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Curso de inglês na Alura Língua</div></li><li
+class="painelPlanos-info-item" title="Cursos para quem está começando com animações, games e programas">
+<svg
+class="painelPlanos-info-check">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-checked"/>
+</svg><div
+class="painelPlanos-info-texto">Acesso à Alura Start</div></li></ul></div></div><div
+class="painelPlanos-vantagens"><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-acesso"/>
+</svg>
+Acesso por 1 ano</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-certificado"/>
+</svg>
+Certificado digital de conclusão</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon i24h">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-24h"/>
+</svg>
+Estude 24h/dia onde e quando quiser</div><div
+class="painelPlanos-vantagem">
+<svg
+class="painelPlanos-vantagem-icon">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-cursos"/>
+</svg>
+Novos cursos toda semana</div></div></div><div
+class="painelPlanos-footer">
+<svg
+class="painelPlanos-onda" preserveAspectRatio="none">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-background-onda"/>
+</svg><div
+class="container"><ul
+class="painelPlanos-footer-list"><li
+class="painelPlanos-footer-item painelPlanos-footer-item-curso">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-cursos"/>
+</svg><h3>520</h3>
+<span>cursos</span></li><li
+class="painelPlanos-footer-item painelPlanos-footer-item-aula">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-aulas"/>
+</svg><h3>3.257</h3>
+<span>aulas</span></li><li
+class="painelPlanos-footer-item painelPlanos-footer-item-exerc">
+<svg
+class="painelPlanos-footer-item-curso-icone">
+<use
+xlink:href="/svg,1520277394/painelPlanos#icon-painelPlanos-icon-exercicios"/>
+</svg><h3>30.074</h3>
+<span>atividades</span></li></ul></div></div></div><footer
+class="footer"><div
+class="container"><div
+class="footer-navegue"><ul
+class="footer-navegue-lista"><li
+class="footer-navegue-lista-link"><a
+href="/apostilas">Apostilas</a></li><li
+class="footer-navegue-lista-link"><a
+href="/planos-cursos-online">Planos</a></li><li
+class="footer-navegue-lista-link"><a
+href="/cursos-online-tecnologia">Todos os cursos</a></li><li
+class="footer-navegue-lista-link"><a
+href="/carreiras">Carreiras</a></li><li
+class="footer-navegue-lista-link"><a
+href="/instrutores">Instrutores</a></li><li
+class="footer-navegue-lista-link"><a
+href="/quero-ser-instrutor">Como virar instrutor</a></li><li
+class="footer-navegue-lista-link"><a
+href="https://cursos.alura.com.br/rank/monthly">Ranking</a></li><li
+class="footer-navegue-lista-link"><a
+href="http://blog.alura.com.br/">Blog da Alura</a></li><li
+class="footer-navegue-lista-link"><a
+href="/podcast-nerdtech">Podcast Nerdtech</a></li><li
+class="footer-navegue-lista-link"><a
+href="/politica-de-privacidade">Política de Privacidade</a></li><li
+class="footer-navegue-lista-link"><a
+href="/termos-de-uso">Termos de Uso</a></li><li
+class="footer-navegue-lista-link"><a
+href="/sobre">Sobre nós</a></li><li
+class="footer-navegue-lista-link"><a
+href="http://suporte.alura.com.br/">Perguntas frequentes</a></li></ul></div><div
+class="footer-column footer-column-cards"><div
+class="footer-newsletter"><h2 class="footer-newsletter-titulo">Receba Novidades e Lançamentos</h2><form
+class="footer-newsletter-form" action="https://cursos.alura.com.br/api/cadastra-newsletter" method="POST">
+<input
+type="hidden" name="retorno" value="https://www.alura.com.br/newsletter-cadastrado"><label
+for="email-newsletter">Email</label>
+<input
+type="email" name="email" class="footer-newsletter-input" placeholder="seu email" id="email-newsletter"><button
+type="submit" class="footer-newsletter-button buttonForm">OK</button></form></div><div
+class="footer-card-hotLinks"><h2 class="footer-card-hotLinks-titulo">Nossas redes e apps</h2><div
+class="footer-card-hotLinks-info footer-card-redes">
+<a
+href="https://www.youtube.com/user/aluracursosonline" class="footer-card-hotLinks-link" target="_blank" title="Youtube da Alura">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-youtube"><use
+xlink:href="/svg,1520277394/footer#icon-footer-youtube"/></svg>
+<span>YouTube</span>
+</a>
+<a
+href="https://www.facebook.com/AluraCursosOnline/" class="footer-card-hotLinks-link" target="_blank" title="Facebook da Alura">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-facebook"><use
+xlink:href="/svg,1520277394/footer#icon-footer-facebook"/></svg>
+<span>Facebook</span>
+</a>
+<a
+href="https://twitter.com/aluraonline" class="footer-card-hotLinks-link" target="_blank" title="Twitter da Alura">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-twitter"><use
+xlink:href="/svg,1520277394/footer#icon-footer-twitter"/></svg>
+<span>Twitter</span>
+</a>
+<a
+href="http://hipsters.tech/" class="footer-card-hotLinks-link" target="_blank" title="Podcast Hipsters Ponto Tech">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-hipsters"><use
+xlink:href="/svg,1520277394/footer#icon-footer-hipsters"/></svg>
+<span>Podcast Hipsters.tech</span>
+</a></div><div
+class="footer-card-hotLinks-info footer-card-mobile">
+<a
+href="https://play.google.com/store/apps/details?id=br.com.alura.mobi&hl=pt_BR" class="footer-card-hotLinks-link" target="_blank" title="Baixar na Google Play Store">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-mobile"><use
+xlink:href="/svg,1520277394/footer#icon-footer-googleplay"/></svg>
+<span>Google Play Store</span>
+</a>
+<a
+href="https://itunes.apple.com/br/app/alura-cursos-online/id1225776635" class="footer-card-hotLinks-link" target="_blank" title="Baixar na AppStore">
+<svg
+class="footer-card-hotLinks-icon footer-card-hotLinks-mobile"><use
+xlink:href="/svg,1520277394/footer#icon-footer-appstore"/></svg>
+<span>AppStore</span>
+</a></div></div></div><div
+class="footer-column">
+<a
+class="footer-card footer-card-contato" href="/contato"><div
+class="footer-card-info"><h2 class="footer-card-titulo">Fale Conosco</h2><p
+class="footer-card-texto">Dúvida, crítica, sugestão ou elogio?</p><p
+class="footer-card-fakeLink">Entre em contato!</p></div>
+</a><a
+class="footer-card footer-card-empresa" href="/empresas"><div
+class="footer-card-info"><h2 class="footer-card-titulo">Empresa?</h2><p
+class="footer-card-texto">Planos corporativos para o seu time.</p><p
+class="footer-card-fakeLink">Saiba mais</p></div>
+</a></div><div
+class="footer-info"><div
+class="footer-logos">
+<a
+class="footer-logos-home" href="/">
+<img
+src="/assets/img/alura-logo.1520277394.svg" alt="Alura" class="footer-logo">
+</a>
+<a
+href="https://www.caelum.com.br/" class="footer-link-caelum"><h3 class="footer-powered-by">Powered by</h3>
+<img
+src="/assets/img/footer/caelum-logo.1520277394.svg" alt="Caelum" class="footer-logo footer-caelumLogo">
+</a></div><div
+class="footer-cnpj"><p>
+<span
+class="footer-empresa-item">AOVS Sistemas de Informática Ltda</span>
+<span
+class="footer-empresa-item">CNPJ 05.555.382/0001-33</span></p></div></div></div></footer><nav
+class="listaCarreiras"><div
+class="container"><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #ffd44a; color: #ffd44a">
+Mobile</h3>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-android">
+Carreira de Desenvolvedor Android				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-ios">
+Carreira de Desenvolvedor Apple Mobile iOS				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvimento-mobile-kotlin">
+Carreira de Desenvolvimento mobile com Kotlin				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-mobile-cordova">
+Carreira de Desenvolvedor Mobile Multiplataforma Cordova				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-mobile-xamarin">
+Carreira de Desenvolvedor Mobile Multiplataforma Xamarin				</a>
+<a
+class="carreiras-link" href="/carreira-programador-ionic">
+Carreira de Programador Ionic				</a><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #25d285; color: #25d285">
+Programação</h3>
+<a
+class="carreiras-link" href="/carreira-iniciante-em-logica-de-programacao">
+Carreira de Iniciante em Programação				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-java-junior">
+Carreira de Desenvolvedor Java				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-java-junior-web">
+Carreira de Desenvolvedor Java Web				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-java-web-enterprise">
+Carreira de Desenvolvedor Java Web Enterprise				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-java-web-spring">
+Carreira de Desenvolvedor Java Web com Spring				</a>
+<a
+class="carreiras-link" href="/carreira-expert-em-integracoes-de-aplicacoes-com-java">
+Carreira de ​Expert em Integrações de Aplicações com Java				</a>
+<a
+class="carreiras-link" href="/carreira-avancando-plataforma-java">
+Carreira de Avançando na Plataforma Java				</a>
+<a
+class="carreiras-link" href="/carreira-expert-orientacao-a-objetos">
+Carreira de ​Expert em Orientação a Objetos com Java				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-aspnet-junior">
+Carreira de Desenvolvedor ASP.NET MVC5				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-net-erudito">
+Carreira de Desenvolvedor .NET Erudito				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-net-com-entity-framework">
+Carreira de Desenvolvedor .Net com Entity Framework					</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-php-junior">
+Carreira de  Iniciante Back-end PHP				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-php-erudito">
+Carreira de Desenvolvedor PHP Erudito				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-python">
+Carreira de Desenvolvedor Python				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-ruby-rails">
+Carreira de Desenvolvedor Ruby and Rails 				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-wordpress">
+Carreira de Desenvolvedor Wordpress				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-java">
+Carreira de  Certificação Java OCJP I				</a>
+<a
+class="carreiras-link" href="/carreira-inteligencia-artificial-iniciante">
+Carreira de Inteligência Artificial Iniciante				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvimento-jogos-cocos-creator">
+Carreira de Desenvolvimento de jogos com Cocos Creator				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvimento-jogos-unity">
+Carreira de Desenvolvimento de jogos com Unity				</a>
+<a
+class="carreiras-link" href="/carreira-embarcados-e-iot">
+Carreira de Embarcados e Internet das Coisas				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-web-com-flask-e-python3">
+Carreira de Desenvolvedor Web com Flask				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvimento-web-com-play-framework">
+Carreira de Desenvolvimento web com Play! Framework				</a><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #5ec6f3; color: #5ec6f3">
+Front-end</h3>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-javascript">
+Carreira de Desenvolvedor JavaScript				</a>
+<a
+class="carreiras-link" href="/carreira-engenheiro-javascript">
+Carreira de Engenheiro JavaScript				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-front-end">
+Carreira de Desenvolvedor Front-end				</a>
+<a
+class="carreiras-link" href="/carreira-engenheiro-front-end">
+Carreira de Engenheiro Front-end				</a>
+<a
+class="carreiras-link" href="/carreira-programador-angular">
+Carreira de Programador Angular 1				</a>
+<a
+class="carreiras-link" href="/carreira-programador-fullstack-mean">
+Carreira de Desenvolvedor FullStack MEAN				</a>
+<a
+class="carreiras-link" href="/carreira-programador-angular2">
+Carreira de Programador Angular 2 				</a>
+<a
+class="carreiras-link" href="/carreira-programador-react">
+Carreira de Programador React				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-vuejs">
+Carreira de Desenvolvedor Vue.js				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-typescript">
+Carreira de Desenvolvedor Typescript				</a>
+<a
+class="carreiras-link" href="/carreira-node-js">
+Carreira de Desenvolvedor Node.js				</a><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #ec6e5a; color: #ec6e5a">
+Infraestrutura</h3>
+<a
+class="carreiras-link" href="/carreira-engenheiro-devops">
+Carreira de Engenheiro Devops				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-cisco-ccna">
+Carreira de Certificação Cisco CCNA				</a>
+<a
+class="carreiras-link" href="/carreira-powershell">
+Carreira de PowerShell				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-oracle">
+Carreira de Certificação Oracle 12c: Exame 1Z0-061				</a>
+<a
+class="carreiras-link" href="/carreira-infraestrutra-de-redes">
+Carreira de Infraestrutura de redes				</a>
+<a
+class="carreiras-link" href="/carreira-iniciando-com-sql-e-mysql">
+Carreira de Iniciando com SQL e MySQL				</a>
+<a
+class="carreiras-link" href="/carreira-seguranca-de-aplicacoes">
+Carreira de Segurança de aplicações				</a>
+<a
+class="carreiras-link" href="/carreira-oracle-pl-sql">
+Carreira de Oracle SQL e PL/SQL				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-lpi-linux-essentials">
+Carreira de Certificação LPI Linux Essentials				</a>
+<a
+class="carreiras-link" href="/carreira-iot">
+Carreira de Internet das Coisas				</a>
+<a
+class="carreiras-link" href="/carreira-raspberry-pi">
+Carreira de Raspberry Pi				</a><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #ad85bf; color: #ad85bf">
+Design & UX</h3>
+<a
+class="carreiras-link" href="/carreira-maya">
+Carreira de Box Modeling com Autodesk Maya				</a>
+<a
+class="carreiras-link" href="/carreira-design-grafico-para-materiais-impresso">
+Carreira de Design Gráfico para Materiais Impressos				</a>
+<a
+class="carreiras-link" href="/carreira-design-web-junior">
+Carreira de Design Web				</a>
+<a
+class="carreiras-link" href="/carreira-editor-videos">
+Carreira de Editor de Vídeos				</a>
+<a
+class="carreiras-link" href="/carreira-ux-designer">
+Carreira de UX Designer				</a>
+<a
+class="carreiras-link" href="/carreira-editor-videos-adobe-premiere">
+Carreira de Editor de video com Adobe Premiere				</a>
+<a
+class="carreiras-link" href="/carreira-3ds-max">
+Carreira de Box Modeling com Autodesk 3ds Max				</a>
+<a
+class="carreiras-link" href="/carreira-identidade-visual">
+Carreira de Identidade visual				</a>
+<a
+class="carreiras-link" href="/carreira-motion-designer-essential">
+Carreira de Motion Designer Essential				</a>
+<a
+class="carreiras-link" href="/carreira-producao-grafica-com-photoshop">
+Carreira de Produção Gráfica com Photoshop				</a>
+<a
+class="carreiras-link" href="/carreira-pintura-digital">
+Carreira de Pintura Digital				</a><h3 class="categoria-item-titulo"
+style="border-left: 5px solid #579fd2; color: #579fd2">
+Business</h3>
+<a
+class="carreiras-link" href="/carreira-agilista">
+Carreira de Agilista				</a>
+<a
+class="carreiras-link" href="/carreira-social-media-marketing">
+Carreira de Social Media Marketing				</a>
+<a
+class="carreiras-link" href="/carreira-soft-skills">
+Carreira de Soft Skills				</a>
+<a
+class="carreiras-link" href="/carreira-marketing-digital">
+Carreira de Marketing Digital				</a>
+<a
+class="carreiras-link" href="/carreira-seo-expert">
+Carreira de SEO Expert				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-itil-foundation">
+Carreira de Certificação ITIL Foundation				</a>
+<a
+class="carreiras-link" href="/carreira-gerenciamento-de-projetos-com-scrum">
+Carreira de Gerenciamento de projetos com Scrum				</a>
+<a
+class="carreiras-link" href="/carreira-certificacacao-pmp-e-capm">
+Carreira de Certificação PMP e CAPM				</a>
+<a
+class="carreiras-link" href="/carreira-business-model-canvas">
+Carreira de Business Model Canvas				</a>
+<a
+class="carreiras-link" href="/carreira-design-thinking">
+Carreira de Design thinking				</a>
+<a
+class="carreiras-link" href="/carreira-certificacao-cobit-5">
+Carreira de Certificação COBIT 5 				</a>
+<a
+class="carreiras-link" href="/carreira-email-marketing">
+Carreira de Email Marketing				</a>
+<a
+class="carreiras-link" href="/carreira-desenvolvedor-vba">
+Carreira de Desenvolvedor VBA				</a></div></nav><style>@media not all and (min-width: 1000px){
+		.grupoCaelum{
+			display: none;
+		}
+	}
+
+	.grupoCaelum{
+		background: #fff;
+		height: 240px;
+		border-top: 1px solid #EBEBEE;
+	}
+
+	.grupoCaelum .container{
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding-top: 0;
+		padding-bottom: 0;
+		height: 100%;
+	}
+
+		.grupoCaelum-list{
+			display: flex;
+			list-style: none;
+			width: 60%;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-top: 20px;
+		}
+
+		.grupoCaelum-title{
+			width: 20%;
+		}
+
+		.grupoCaelum-column {
+			display: inline-block;
+			padding-left: 19px;
+			width: 162px;
+			height: 210px;
+			min-width: 160px;
+		}
+			.grupoCaelum-column-title {
+				font-size: 10px;
+				color: #d7e0e5;
+				text-transform: uppercase;
+				font-weight: 600;
+				margin-bottom: 19px;
+			}
+
+			.grupoCaelum-column-list {
+				list-style: none;
+			}
+
+			.column-item-title {
+				font-size: 11px;
+				text-align: center;
+				vertical-align: middle;
+				display: inline-block;
+				margin-left: 6.5px;
+			}
+
+		.grupoCaelum-column:not(:first-child) {
+			border-left: solid 1px #e3e9ed;
+		}
+
+		.grupoCaelum-title a{
+			display: inline-block;
+			text-decoration: none;
+			color: #657176;
+			letter-spacing: normal;
+			font-size: 18px;
+			margin-top: 54px;
+		}
+
+	.column-item-logo {
+		width: 30px;
+		height: 30px;
+		vertical-align: middle;
+		display: inline-block;
+	}
+
+	.column-item {
+		margin-bottom: 17px;
+	}
+
+	.column-item a{
+		text-decoration: none;
+		color: #657176;
+	}</style><footer
+class="caelum-footer"><div
+class="grupoCaelum"><div
+class="container"><p
+class="grupoCaelum-title"><a
+target="_blank" href="https://www.caelum.com.br/grupo">Grupo Caelum</a></p><ul
+class="grupoCaelum-list"><li
+class="grupoCaelum-column"><p
+class="grupoCaelum-column-title">Educação</p><ul
+class="grupoCaelum-column-list"><li
+class="column-item">
+<a
+target="_blank" href="https://www.caelum.com.br/grupo">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-caelum"><span
+class="column-item-title">Caelum</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="https://www.casadocodigo.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-cdc"><span
+class="column-item-title">Casa do Código</span></svg>
+</a></li></ul></li><li
+class="grupoCaelum-column"><p
+class="grupoCaelum-column-title">Educação Online</p><ul
+class="grupoCaelum-column-list"><li
+class="column-item">
+<a
+target="_blank" href="https://www.alura.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-alura"><span
+class="column-item-title">Alura</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="https://www.alurastart.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-alurastart"><span
+class="column-item-title">Alura Start</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="https://www.musicdot.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-musicdot"><span
+class="column-item-title">MusicDot</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="https://www.aluralingua.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-aluralingua"><span
+class="column-item-title">Alura Língua</span></svg>
+</a></li></ul></li><li
+class="grupoCaelum-column"><p
+class="grupoCaelum-column-title">Comunidade</p><ul
+class="grupoCaelum-column-list"><li
+class="column-item">
+<a
+target="_blank" href="https://hipsters.tech">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-hipsterstech"><span
+class="column-item-title">Hipsters ponto Tech</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="https://hipsters.jobs">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-hipstersjobs"><span
+class="column-item-title">Hipsters ponto Jobs</span></svg>
+</a></li><li
+class="column-item">
+<a
+target="_blank" href="http://www.guj.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-guj"><span
+class="column-item-title">GUJ</span></svg>
+</a></li></ul></li><li
+class="grupoCaelum-column"><p
+class="grupoCaelum-column-title">Parceiros</p><ul
+class="grupoCaelum-column-list"><li
+class="column-item">
+<a
+target="_blank" href="https://imasters.com.br">
+<svg
+class="column-item-logo"><use
+xlink:href="/svg,1520277394/caelumFooter#icon-caelumFooter-imasters"><span
+class="column-item-title">iMasters</span></svg>
+</a></li></ul></li></ul></div></div></footer> <script src="/assets/js/lib/svg4everybody.min.1520277394.js" async></script> <script src="/assets/js/header/menu.1520277394.js" async></script> <script src="/assets/js/parceiro.1520277394.js" async></script> <script src="/assets/js/header/busca.1520277394.js" async></script> <script src="/assets/js/header/cursos.1520277394.js" async></script> <script src="/assets/js/detect.1520277394.js" async></script> <script src="/assets/js/video.1520277394.js" async></script> <script>var userId = (document.cookie.match('alura.userId=([^;]+)')||[null,null])[1];
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+  	ga('create', 'UA-42101548-1', 'alura.com.br', 'tracker0', {'siteSpeedSampleRate': 50});
+
+	if (userId) ga('tracker0.set', 'userId', userId);
+
+	ga('tracker0.require', 'displayfeatures');
+	ga('tracker0.send', 'pageview');
+  	ga('create', 'UA-42101548-9', 'alura.com.br', 'tracker1', {'siteSpeedSampleRate': 50});
+
+	if (userId) ga('tracker1.set', 'userId', userId);
+
+	ga('tracker1.require', 'displayfeatures');
+	ga('tracker1.send', 'pageview');</script> <script async src='//www.google-analytics.com/analytics.js'></script> <script src="/bundle,lib/hunt.min,painelPlanos.1520277394.js" async></script> <script src="/assets/js/footer/footer.1520277394.js" async></script> <script type="text/javascript" src="https://static.criteo.net/js/ld/ld.js" async></script> <script type="text/javascript">function criteoPush(event, data){
+		var isAluno = document.cookie.match('alura.userId=([^;]+)') != null;
+		if(isAluno) return;
+		window.criteo_q = window.criteo_q || [];
+			window.criteo_q.push(
+		    { event: "setAccount", account: 28037 },
+		    { event: "setEmail", email: "" },
+		    { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d")) },
+	    	{ event: event, item: data}
+			);	
+	};
+	 
+		var courseId = document.querySelector('.painelPlanos').getAttribute('data-course-id');
+		var $planos = document.querySelectorAll('.painelPlanos-plano');
+		for(i = 0; i < $planos.length; i++){
+			$planos[i].addEventListener('click', function (event) {
+				var $this = this;
+				var $origem = event.target;
+				if ($origem.classList.contains('painelPlanos-plano-botaoComprar')) {
+					var price = $this.querySelector('.painelPlanos-plano-precoTotal').innerHTML.replace('.','').match("[0-9]+")[0];
+					criteoPush("viewBasket", [{id: courseId , price: price , quantity: 1}]);
+				};
+			});
+		};
+		var criteoCookie = "criteo.course=" + courseId + "; path=/; domain=.alura.com.br";
+		document.cookie = criteoCookie;
+				criteoPush("viewItem", "548");</script> <script src="/assets/js/curso/curso.1520277394.js" async></script> </body></html>

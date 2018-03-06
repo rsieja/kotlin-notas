@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Android Java Interfaces By Example</title>
+   
+
+  <meta charset="utf-8">
+  <meta name="description" content="I&#39;m not sure if I&#39;m just dumb, but I&#39;ve almost never read a technical definition of a Java Interface which actually tells you where/when you might want to use them. Hopefully this tutorial will fill in some blanks for you.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Open Graph tags for social sharing -->
+  <meta property="fb:app_id" content="213077892569883"/>
+  <meta property="og:title" content="Android Java Interfaces By Example"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"/>
+  <meta property="og:image" content="http://wiseassblog.com/images/wiseAss-share-img.png"/>
+  <meta property="og:image:width" content="828">
+  <meta property="og:image:height" content="315">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:site_name" content="wiseAss"/>
+  <meta property="og:description"
+        content="I&#39;m not sure if I&#39;m just dumb, but I&#39;ve almost never read a technical definition of a Java Interface which actually tells you where/when you might want to use them. Hopefully this tutorial will fill in some blanks for you."/>
+  <!-- End Open Graph tags -->
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://code.getmdl.io/1.2.1/material.blue_grey-indigo.min.css" rel="stylesheet"/>
+  <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet" />
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  
+  <!-- https://realfavicongenerator.net -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+
+  <script src="https://code.getmdl.io/1.2.1/material.min.js" defer></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>  
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+  <script src="/js/scripts.js" defer></script>
+</head>
+
+<body class=".body">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header 
+  mdl-layout__header--fixed 
+  header mdl-shadow--4dp">
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title">
+       Tutorials
+      
+    </span>
+
+    <div class="mdl-layout-spacer"></div>
+
+    <a href="javascript:;" class="wa-social-links-toggler"><i class="fas wa-social-icon fa-th"></i></a>
+
+    <div class="mdl-navigation wa-social-links">
+      <ul>
+        <li><a class="link-social" href="https://www.youtube.com/user/gosuddr93"  target="_blank">
+              <i class="fab wa-social-icon fa-youtube"></i>
+            </a>
+        </li>
+        <li>
+          <a class="link-social"  href="https://github.com/BracketCove" target="_blank">
+            <i class="fab wa-social-icon fa-github"></i>
+          </a>
+        </li>
+        <li>
+          <a class="link-social" href="https://join.slack.com/t/wiseass/shared_invite/enQtMjg5OTc3NTk0MjI5LTc5ZmNiYjAyNzJmMzFiNGFjNzhiZTU4ZDdhNDE2NzA0ODEwZTJjYjNjOWNjMDA5YmEzMDlhN2ZjMGI1Yzg5NGM"  target="_blank">
+            <i class="fab wa-social-icon fa-slack"></i>
+          </a>    
+        </li>
+        <li>
+          <a class="link-social" href="https://www.facebook.com/wiseassblog/"  target="_blank">
+            <i class="fab wa-social-icon fa-facebook"></i>
+          </a>          
+        </li>
+        <li>
+          <a class="link-social"  href="https://plus.google.com/+wiseass" target="_blank">
+            <i class="fab wa-social-icon fa-google-plus"></i>
+          </a>              
+        </li>
+        <li>
+          <a class="link-social"  href="https://twitter.com/wiseAss301/" target="_blank">
+            <i class="fab wa-social-icon fa-twitter"></i>
+          </a>              
+        </li>
+        <li>
+          <a class="link-social"  href="https://www.paypal.me/ryanmkay" target="_blank">
+            <i class="fab wa-social-icon fa-paypal"></i>
+          </a>    
+        </li>
+        <li>
+          <a class="link-social" href="https://www.patreon.com/user?u=5114325"  target="_blank">
+            <i class="fab wa-social-icon fa-patreon"></i>            
+          </a>    
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</header>
+
+<div class="mdl-layout__drawer">
+  <div class="text-center site-logo">
+    <img src="/images/wiseass-logo.gif" alt="wiseAss logo">  
+    <img src="/images/wiseass-grass.png" alt="wiseAss slogan">
+  </div>
+  <span class="text-center site-title">wise<span class="wa-bold">Ass</span></span>
+
+  <nav class="mdl-navigation">
+    
+    
+    
+        <a class="mdl-navigation__link" href="/index"><i class="fas fa-home margin-r-15"></i>Home</a>
+    
+
+    
+        <a class="mdl-navigation__link active" href="/tutorials"><i class="fas fa-pencil-alt margin-r-15"></i>Tutorials</a>
+    
+
+    
+        <a class="mdl-navigation__link" href="/reviews"><i class="fas fa-star margin-r-15"></i>Reviews</a>
+    
+    
+    
+        <a class="mdl-navigation__link" href="/support"><i class="fas fa-life-ring margin-r-15"></i>Support</a>
+    
+
+    
+        <a class="mdl-navigation__link" href="/products"><i class="fas fa-shopping-bag margin-r-15"></i>Products</a>
+    
+
+    
+        <a class="mdl-navigation__link" href="/about"><i class="fas fa-info-circle margin-r-15"></i>About</a>
+    
+  </nav>
+
+</div>
+    <main class="background-div mdl-layout__content">
+
+      <div class="content">
+        <article class="mdl-card wa-post-content">
+          <h2>Android Java Interfaces By Example</h2>
+<p class="wa-post-meta">By <i class="fa fa-user wa-post-meta-icon"></i> Ryan on <i class="fa fa-calendar wa-post-meta-icon"></i> September 13, 2016</p>
+
+<p>I’m not sure if I’m just dumb, but I’ve almost never read a technical definition of a Java Interface which actually tells you where/when you might want to use them. In fact, it was only through actually using them in my own Applications, that I began to understand how useful they can be. I strongly believe that using a new concept/technology in the context of a demo/non-production project (instead of only reading about it and taking notes) is one of the best ways of learning what it does/how it works. That being said, I hope to demonstrate that Interfaces are quite straight forward, and only require a good explanation.</p>
+
+<p>I may be being unfair to technical definitions as they aren’t necessarily meant for beginners, but I’m not going to dwell on such things in this tutorial. Instead, I’ll hopefully be showing you that the reason why Interfaces can be such an difficult concept to learn , is because they’re only relevant in a limited number of use cases. In my case, since I’m only interested in learning things that are either intrinsically interesting to me (read: I’m a f**ing nerd) or DIRECTLY APPLICABLE to a project’s given requirements, I was approaching Interfaces with the wrong attitude. I was asking, “Do I need them?”, when I should’ve been asking “When are they a better solution than other approaches?”</p>
+
+<p>So that’s basically the goal of this Tutorial. I’ll try to tell you what they are, how to make them, and when you might want to use them.</p>
+
+<p><a class="link-to-video" href="https://www.youtube.com/watch?v=VCmi0gBxd0E" target="_blank">Check out the video here.</a></p>
+
+<h2 id="what-is-an-interface">What is an Interface?</h2>
+
+<p>“[1] In the Java programming language, an interface is a reference type, similar to a class, [2] that can contain only constants, method signatures, default methods, static methods, and nested types. Method bodies exist only for default methods and static methods. [3] Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces.”</p>
+
+<p>Quoted from <a href="https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html" target="_blank">Oracle</a>.</p>
+
+<p>Although I can assure you that this is the only reference to a Technical Definition I’ll use, I still think it’s important to know what this definition actually tells you.</p>
+
+<p>[1] In essence, an Interface can be a file like a Class. I say ‘can be’ because they can be nested within other classes/Interfaces, but let’s just think of them as an individual thing for simpliciy’s sake.</p>
+
+<p>[2] Whereas as a Class can be thought of as usually being full of Implementation details (including method names and the code within those methods), we can think of Interfaces as a higher level kind of Class. Higher level, as in it can describe what something is supposed to do, but it doesn’t describe how it does it (e.g. Including method names, but no code within such methods). Just to confuse the issue, there are actually limited use cases where you might want Implementation details in an Interface (such as Default Methods), but don’t worry about that right now.</p>
+
+<p>[3] A key difference between an Interface and a Class, is that an Interface cannot be instantiated. The reason for this distinction should become apparent in my examples.</p>
+
+<p>Don’t worry if this isn’t sinking in, carry on. Once you check out the examples, you may want to revisit this section as it will make a bit more sense.</p>
+
+<p>In the following examples, we’re going to imagine that we’re Software Engineers working on the Pre-Release of Android 1.0. Obviously that’s a silly thought, but the imagining is actually part of the learning process. While part of this should teach you what an Interface is and how to make one, the most important takeway is simply learning to know when an Interface might be a good approach, among several possible approaches.</p>
+
+<h3 id="example-1-how-to-implement-a-bad-solution">Example 1: How to implement a bad Solution</h3>
+
+<p>Our current task is to figure out some way for Buttons to communicate with Activities. Since doing this for real would be a monumental waste of our time, I’ll provide you with some Pseudo-Code examples which contain only relevant  implementation details. We’ll start by solving the problem with a quick solution that ‘works’ (at least hypothetically), but also sucks. The important thing is why it sucks; as we’ll see later.</p>
+
+<p>Create the following two Classes:</p>
+
+<pre class="prettyprint linenums"> 
+	public class ButtonOne {
+        //By holding the Activity as a variable, we can talk to it when button clicks are fired.
+        private MainActivityOne mainActivityOne;
+
+        public void setMainActivityOne(MainActivityOne mainActivityOne){
+            this.mainActivityOne = mainActivityOne;
+        }
+
+        public ButtonOne(){
+
+        }   
+
+        /**
+        *Fires when a User Clicks the Button.
+        * Let's not worry how, just assume it works.
+        */
+        private void OnClick(){
+            //we're basically relaying the fact that the button was clicked, and which one was clicked (by hypothetical Id), so that the Activity can handle user input.
+            mainActivityOne.onClick(getViewId());
+        } 
+
+        //In reality, the View Id is generated at Runtime. At the moment, I don't care how.
+        public int getViewId(){
+            //fake view id
+            return 123456;
+        }
+    }
+</pre>
+
+<pre class="prettyprint linenums"> 
+	public class MainActivityOne extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ButtonOne buttonOne = new ButtonOne();
+
+        /*
+        What does "this" mean? In this particular case, "this" refers to the current Instance
+        of MainActivityOne. If you're still confused, try passing "MainActivityOne.this" instead
+        of just "this" in the method parameters. Notice how it still works :).
+         */
+
+        buttonOne.setMainActivityOne(this);
+    }
+
+    public void onClick(int viewId){
+        //handle event somehow
+    }
+}
+</pre>
+
+<p>Obviously this code wouldn’t actually do anything useful, but there’s a couple things about it that we need to understand. If our goal was is simply to have one class talk to another, there’s not anything intrinsically wrong about this approach. If our requirements never changed, then doing extra work is hard to justify. However, once our goals start to include “Changing Requirements”, we’ll see how quickly this solution starts to break down.</p>
+
+<p>Notice how we can now say that ButtonOne has an explicit dependency on MainActivityOne. I know I sound like Captain Obvious here, but we know this because ButtonOne says MainActivityOne in it’s code. This would mean that for each different kind of Activity (in my experience, there’s usually more than one :), we either need to create a specialized Button class for each Activity (read: making a bad solution worse), or handle this some other way.</p>
+
+<p><strong>If you find yourself repeating the same/similar lines of code, across several similar classes, immediately consider using an Interface or an Abstract class. This is a guideline, not a rule.</strong></p>
+
+<h3 id="example-2-changing-requirements">Example 2: Changing Requirements</h3>
+
+<p>A few hours before the official release of Android, our Project Manager decides that it would be a great time to add a few items to our launch check-list, because keeping clients happy is more important than letting Engineers deliver a solid and tested product (amirite lol?).</p>
+
+<p>Specifically, we now need to make sure that our solution satisfies the following new “Requirements”:</p>
+<ul>
+  <li>We must figure out a way for multiple Views (Buttons, ImageButton, Pickers, etc.) to talk to whatever Class contains them.</li>
+  <li>This solution must also work with multiple Classes, as we now have Fragments which can also contain/handle Views.</li>
+</ul>
+
+<p>In looking at our previous solution, we know that things must change. Filling our View classes with more Explicit Dependencies is quite obviously a terrible approach at this point, and we’ll end up with similar issues in our Fragments/Activities.</p>
+
+<p><strong>In other words, we need to figure out a solution which is Loosely-Coupled. Again, these are guidelines, not rules:</strong></p>
+<ul>
+  <li>Some signs of Tightly-Coupled code: Excessive Explicit Dependencies, changing code in one class/unit breaks other classes/units, excessive specialized classes which do similar things.</li>
+  <li>Some signs of Loosely-Coupled code: Dependencies are made explicit/abstract depending on likelihood of changing requriements and what the situation calls for, you can change specific classes/units of code without breaking other classes/units, classes are only as specialized as they need to be and emphasis is put on reducing complexity and repetitive code (this trespasses in the realm of <em>Cohesion</em>, but I’ll save that for another post).</li>
+</ul>
+
+<p>While there’s inevitably multiple ways in which we could solve this problem, I feel like the most straight forward and effective solution is to use an Interface instead of direct calls to explicit dependencies (it’s almost like I planned that :). Let’s learn how to do that.</p>
+
+<p>Now, as I mentioned before, just as you can have a file which contains a single Class, we can have a file which contains a single Interface. However, we can also have nested classes/interfaces within the same file as well. I’m just trying to make the point that you don’t <strong>need</strong> to make a seperate file like this, but you certainly can. I’m sure if you just work with them, you’ll start to see when they should be nested or kept seperate; trust your own instincts once you’re more comfortable.</p>
+
+<p>Create the following Interface. If you’re IDE doesn’t have an obvious way to do that, just make a Class and change <strong>class</strong> to <strong>interface</strong> like so:</p>
+<pre class="prettyprint linenums"> 
+	//note that it says "interface" instead of class :)
+public interface OnWidgetClickListener {
+
+    void onClick(int viewId);
+    /*
+    Notice how all I've done is just pulled the method we originally had in MainActivityOne into
+    this Interface. How the method is handled is still up to the class that implements this
+    interface, but we've basically made a Contract that requires a class to have a method
+    which is called onClick, returns void, and must pass a viewId as parameters. 
+    */
+}
+</pre>
+
+<p>Once you get away from all the jargon, Interfaces are actually pretty damn straight-forward. There’s nothing mystical going on in this code, it’s basically just a contract which allows two or more Classes to communicate without having to know or care who’s on the other end. As long as both Classes uphold their end of the Contract (i.e. including the methods, supplying the right params, handling return statements appropriately, etc.), we can keep our objects concerned with their own responsibilities/implementation.</p>
+
+<p>Since the utility of doing this may not yet be obvious (it wasn’t to me at first, but hopefully I’m doing a better job teaching you than the sources I first learned from), let’s implement our new solution and see where we’re at from there:</p>
+
+<p>Create the following Classes. I’ve chosen to make copies of our original Activty/Button classes, like so:</p>
+<pre class="prettyprint linenums"> 
+	public class ButtonTwo {
+    //Replaced Explicit Dependency with Interface!
+    private OnWidgetClickListener onWidgetClickListener;
+
+    /*
+    After our Activity is created, it will pass itself into the Button with this method.
+    The key takeaway here, is that we don't need to have the Explicit Dependency passed in,
+    as our Button only cares that whatever Class calls this method, implements the interface.
+    
+    Give that some contemplation :)
+     */
+    public void setOnWidgetClickListener(OnWidgetClickListener onWidgetClickListener) {
+        this.onWidgetClickListener = onWidgetClickListener;
+    }
+
+    public ButtonTwo(){}
+
+    /**
+     *Fires when a User Clicks the Button.
+     * Let's not worry how, just assume it works.
+     */
+    private void OnClick(){
+        //as long as setOnWidgetClickListener was set (i.e. it isn't null), 
+        // this method will work the same as before
+        onWidgetClickListener.onClick(getViewId());
+    }
+
+    //In reality, the View Id is generated at Runtime. At the moment, I don't care how.
+    public int getViewId(){
+        //fake view id
+        return 123456;
+    }
+}
+</pre>
+
+<pre class="prettyprint linenums"> 
+public class MainActivityTwo extends AppCompatActivity implements OnWidgetClickListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        ButtonTwo buttonTwo = new ButtonTwo();
+        
+        //notice how we can still say "this", even though the method requires an Interface 
+        // to be passed in? That's because "this" implements the Interface.
+        buttonTwo.setOnWidgetClickListener(this);
+    }
+    
+    //Note that if this method isn't present, our compiler/IDE will scream at us. That is BY DESIGN!
+    @Override
+    public void onClick(int viewId) {
+        //handle somehow
+    }
+}
+</pre>
+
+<p>Now that we’ve implemented a new solution, let’s think about what it does for us:</p>
+<ul>
+  <li>We no longer have any Explicit Dependencies in our Button Class (maybe “Explicit Dependency” is not the right obscure jargon word, but frankly I don’t f***ing care). This means that our Button is set up to talk to any kind of Class, as long as it implements the Interface. This is a great example of “Loose-Coupling” in my humble opinion.</li>
+  <li>We can also reuse this Interface with multiple kinds of Views, as the Interface doesn’t have any dependencies to begin with.</li>
+</ul>
+
+<p>There’s plenty more minutia I could get into, but let’s leave that for now and finish satisfying the rest of our project’s requirements.</p>
+
+<h3 id="example-3-i-guess-interfaces-are-pretty-useful-sometimes">Example 3: I guess Interfaces are pretty useful sometimes…</h3>
+
+<p>To finish off this Sprint, we need to make a Fragment which talks to a View the same way in which an Activity can. But we’ll make this more complex by creating a different kind of View as well; an ImageButton.</p>
+
+<pre class="prettyprint linenums"> 
+public class Fragment extends android.support.v4.app.Fragment implements OnWidgetClickListener {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ButtonTwo buttonTwo = new ButtonTwo();
+        buttonTwo.setOnWidgetClickListener(this);
+        
+        ImageButton imageButton = new ImageButton();
+        imageButton.setOnWidgetClickListener(this);
+    }
+
+    @Override
+    public void onClick(int viewId) {
+        //do something
+    }
+}
+</pre>
+
+<pre class="prettyprint linenums"> 
+public class ImageButton {
+    private OnWidgetClickListener onWidgetClickListener;
+
+    public void setOnWidgetClickListener(OnWidgetClickListener onWidgetClickListener) {
+        this.onWidgetClickListener = onWidgetClickListener;
+    }
+
+    public ImageButton(){}
+
+    private void OnClick(){
+
+        onWidgetClickListener.onClick(getViewId());
+    }
+
+    public int getViewId(){
+        return 123456;
+    }
+}
+</pre>
+
+<p>I think you’ve probably got the picture by now, but here’s a quick recap anyway:</p>
+<ul>
+  <li>Our old solution kind of worked at first, but started to suck really bad once our requirements changed. We don’t always need flexible solutions, but we should try to understand <strong>when we might need them</strong>.</li>
+  <li>Our new solution can now handle changing requirements quite easily (as we just did). We could cook up all kinds of Views and Managing Classes, but they just need to respect the Contract/Interface in order for things to function properly.</li>
+</ul>
+
+<p>That’s basically it. A few of you may have noticed that we have some repetitive code between our View classes that could also be pulled out, perhaps by creating a “View” parent class for each widget. That’s absolutely true, but I’ll leave that idea for another day.</p>
+
+<p>Thanks for learning.</p>
+
+          <div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fab fa-facebook wa-fa-facebook-share share-button"></i>
+        </a>
+
+        <a  href="https://twitter.com/share?text=Check this out:"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fab fa-twitter wa-fa-twitter-share share-button"></i>
+        </a>
+
+        <a  href="https://plus.google.com/share?url=http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Google+" >
+            <i class="fab fa-google-plus wa-fa-google-plus-share share-button"></i>
+        </a>
+
+        <a  href="http://www.tumblr.com/share/link?url=http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Tumblr" >
+            <i class="fab fa-tumblr wa-fa-tumblr-share share-button"></i>
+        </a>
+
+        <a  href="http://www.reddit.com/submit?url=http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Reddit" >
+            <i class="fab fa-reddit-alien wa-fa-reddit-share share-button"></i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/&title=Android+Java+Interfaces+By+Example&summary=I'm not sure if I'm just dumb, but I've almost never read a technical definition of a Java Interface which actually tells you where/when you might want to use them. Hopefully this tutorial will fill in some blanks for you.&source=wiseAss Tutorials and Reviews"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fab fa-linkedin wa-fa-linkedin-share share-button"></i>
+        </a>
+
+        <a  href="mailto:?subject=Android Java Interfaces By Example&amp;body=Check out this site http://www.wiseassblog.com/tutorials/java/android/interface/2016/09/13/android-java-interfaces/"
+            title="Share via Email" >
+            <i class="fas fa-envelope wa-fa-envelope-share share-button"></i>
+        </a>
+    </div>
+
+</div>
+        </article>        
+        <div class="mdl-card wa-related-post">
+          <h3>Related Posts</h3>
+          <ul class="posts ml">
+            
+            <li><span>12 Feb 2018</span> &raquo; <a href="/tutorials/2018/02/12/passive-view-and-soc/">WTF Does Model-View-Presenter Actually Mean?</a></li>
+            
+            <li><span>17 Nov 2017</span> &raquo; <a href="/android/software%20architecture/2017/11/17/dropouts_guide_samples/">Samples from "A Dropout's Guide to Designing and Building Android Apps"</a></li>
+            
+            <li><span>27 Jun 2017</span> &raquo; <a href="/q&a/java/android/2017/06/27/android_live_q_and_a_ep_9/">Android Live Q&A Ep. 9 - wiseAss</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </main>    
+    <div class="wa-ad-card-container">
+  <div class="mdl-shadow--2dp ad-card-toggler">
+    <i class="fa fa-2x fa-angle-right"></i>
+  </div>
+  <div class="ad-card mdl-card mdl-shadow--2dp wa-card-light">    
+    <div class="mdl-card__title">
+      <img src="/images/ebook.png" alt="Android EBook" class="margin-auto">
+    </div>
+    <div class="mdl-card__supporting-text">
+      Beginner Android Development
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <a href="/products" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        View
+      </a>
+    </div>  
+  </div>  
+</div>
+
+    <footer class="mdl-mini-footer">
+  	<div class="mdl-mini-footer__left-section">    
+    	<span>Copyright &copy; 2016-2018 <a href="/index.html" style="color: #fff8e1; text-decoration: none;" class="margin-r-15">wise<strong>Ass</strong></a></span>    
+    	<span class="text-small">{ Tutorials and ramblings on Software Architecture, Android Development, Java and Kotlin.
+ }</span>    	
+  	</div>
+  	<a href="#" class="wa-back-to-top">
+  		<i class="fa fa-3x fa-arrow-circle-up"></i>   
+	</a>
+</footer>
+  </div>
+</body>
+
+</html>
